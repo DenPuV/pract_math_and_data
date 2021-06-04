@@ -15,11 +15,14 @@ X = np.array([
   [5, 4],
   [2, 2]])
 
+X = np.array([[]])
+
 # запуск кластеризации
 ans = kmeans(2, X)
 
 # отображение результатов
 print(ans)
-plt.plot(X[:,0], X[:,1], 'bx', ans[:,0], ans[:,1], 'r*', markersize=20)
-plt.grid()
-plt.show()
+if X.shape[0] > 0 and X.shape[1] > 0:
+    plt.plot(X[:,0], X[:,1], 'bx', ans[:,0], ans[:,1], 'r*', markersize=20)
+    plt.grid()
+    plt.show()
