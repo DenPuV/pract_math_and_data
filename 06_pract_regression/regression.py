@@ -1,10 +1,16 @@
+import sys
 from PIL import Image
 import numpy as np
 from sklearn import linear_model
 import matplotlib.pyplot as plt
 
-im = Image.open('image.jpg')
-data = np.array(im.getdata()).reshape([im.height, im.width, 3])
+try:
+    im = Image.open('image.jpg')
+    data = np.array(im.getdata()).reshape([im.height, im.width, 3])
+except:
+    print("файл не найден")
+    sys.exit()
+
 
 x = np.arange(0, im.width)
 X = np.array([x, x**2.0, x**3.0, x**4.0, x**5.0]).transpose()
