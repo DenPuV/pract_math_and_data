@@ -18,8 +18,18 @@ X = np.array([[33., 21., 1],
              [135., 47., 4],
              [138., 66., 4]])
 
-height = float(input('Введите рост: '))
-weight = float(input('Введите вес: '))
+
+while(True):
+    try:
+        height = float(input('Введите рост: '))
+        weight = float(input('Введите вес: '))
+        if(height > 0 and weight > 0): break
+        else: print("Неверные параметры")
+    except:
+        print("Неверные параметры")
+    
+
+
 obj = np.array([height, weight])
 
 k = 3
