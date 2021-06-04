@@ -24,6 +24,9 @@ def decision_tree(X, Y, scale, level=0):
 
     print('')
 
+    if level > 10 : return
+    if X.shape[0] < 1 or X.shape[1] < 1 : return
+
     n = X.shape[1]  # количество признаков
     m = X.shape[0]  # количество примеров
 
