@@ -6,9 +6,7 @@ import random
 def genMas(k, n):
     if(k <= 0):
         raise Exception("Неверные аргументы")
-    li = list(range(k))
-    for i in range(0, k):
-        li[i] = [random.randint(0, 100) for i in range(n)]
+    li = [[random.randint(0, 100) for i in range(n)] for i in range(k)]
     return max(li, key=lambda arr: sum(arr))
     
 print(genMas(10, 5))
