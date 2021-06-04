@@ -4,18 +4,12 @@ import random
 #Задание 4
 
 def genMas(k, n):
-    if(k <= 0 and k <= 0):
+    if(k <= 0):
         raise Exception("Неверные аргументы")
     li = list(range(k))
     for i in range(0, k):
         li[i] = [random.randint(0, 100) for i in range(n)]
-    temp = []
-    s = 0
-    for mas in li:
-        if(sum(mas) > s):
-            s = sum(mas)
-            temp = mas
-    return temp
+    return max(li, key=lambda arr: sum(arr))
     
 print(genMas(10, 5))
 
@@ -24,7 +18,18 @@ print(genMas(10, 5))
 def tableCheck():
     x = input("Введите первое число: ")
     y = input("Введите второе число: ")
+    try:
+        int(x)
+        int(y)
+    except:
+        print("Не верные числа")
+        return
     answer = input("Введите результат перемножения " + x + " и " + y + " : ")
+    try:
+        int(answer)
+    except:
+        print("Не верное числo")
+        return
     if(int(answer) == int(x)*int(y)):
         print("Верно")
     else:
