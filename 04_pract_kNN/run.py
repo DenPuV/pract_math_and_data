@@ -23,7 +23,7 @@ while(True):
     try:
         height = float(input('Введите рост: '))
         weight = float(input('Введите вес: '))
-        if(height > 0 and weight > 0): break
+        if(height > 0 and height < 300 and weight > 0 and weight < 300): break
         else: print("Неверные параметры")
     except:
         print("Неверные параметры")
