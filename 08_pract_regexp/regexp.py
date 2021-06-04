@@ -3,9 +3,9 @@ import re
 
 def regex(Data, regPattern):
     for _str in Data:
-        result = re.search(regPattern, _str)
-        print(_str, 'Подходит' if result else 'Не подходит')
-    print("\n")
+        result = re.search(regPattern, str(_str))
+        print(_str, 'Подходит\n' if result else 'Не подходит\n')
+        
 
 #                 Задание 2
 #Написать регулярное выражение для проверки адреса электронной почты. 
@@ -36,6 +36,6 @@ regex(ips, regPattern)
 #затем цифры номера через дефис.
 
 phones = ['+7(922)123-45-67', '8(922)123-45-67', '+7(909)123-45-67', '+7(923)123-45-67', '+5(922)123-45-67', 
-        '+7(922)1234567', '+7(922)123456']
+        '+7(922)1234567', '+7(922)123456', True]
 regPattern = r'^(\+7|8)\((909|912|922)\)[0-9]{3}\-[0-9]{2}\-[0-9]{2}'
 regex(phones, regPattern)
