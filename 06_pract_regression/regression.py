@@ -25,21 +25,12 @@ plt.show()
 #Привести графики как на рисунке 1 для всех цветовых каналов отдельной строки изображения. 
 #Должно быть 3 графика на одном объекте Figure, для каждого цветового канала должна быть рассчитана и изображена кривая регрессии.
 
-r = data[0, :, 0]
-g = data[0, :, 1]
-b = data[0, :, 2]
 lm = linear_model.LinearRegression()
-lm.fit(X, r)
-predicted = lm.predict(X)
-plt.plot(r, 'r-')
-plt.plot(predicted, 'r--')
-lm.fit(X, g)
-predicted = lm.predict(X)
-plt.plot(g, 'g-')
-plt.plot(predicted, 'g--')
-lm.fit(X, b)
-predicted = lm.predict(X)
-plt.plot(b, 'b-')
-plt.plot(predicted, 'b--')
+colors = ['r', 'g', 'b']
+
+for i in range(3):
+    plt.plot(data[0, :, i], colors[i] + '-')
+    plt.plot(lm.fit(X, data[0, :, i]).predict(X), colors[i] + '--')
+
 plt.grid()
 plt.show()
