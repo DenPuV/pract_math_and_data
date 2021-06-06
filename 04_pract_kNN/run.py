@@ -32,8 +32,5 @@ while(True):
 
 obj = np.array([height, weight])
 
-k = 3
-object_class = k_nearest(X, k, obj)
-
 monkeys = {1: 'lemur', 2: 'chimpanze', 3: 'gorilla', 4: 'orangutan'}
-print(monkeys[object_class])
+print(monkeys[k_nearest(3).fit(X).predict(obj)])
