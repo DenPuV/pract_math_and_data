@@ -15,10 +15,8 @@ X = np.array([
   [5, 4],
   [2, 2]])
 
-X = np.array([[]])
-
 # запуск кластеризации
-ans = kmeans(2, X)
+ans = kmeans(2).fit(X)
 
 # отображение результатов
 print(ans)

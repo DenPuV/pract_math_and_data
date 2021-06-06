@@ -1,15 +1,13 @@
 import numpy as np
 
+# import sklearnsvm as svm
+
 # евклидово расстояние между двумя точками
 def dist(A, B):
-  # TODO: реализуйте вычисление евклидова расстояния для двух точек A и B в N-мерном пространстве
-  # Помните, что размерность пространства может быть произвольной (не только 2D).
-  # Для взятия разностей по каждому измерерию можно использовать код: A - B
-  # Для возведения в квадрат можете использовать оператор ** (например, 3**2 == 9) или функцию np.power
-  # Для вычисления суммы используйте функцию sum или np.sum
-  # Для вычисления квадратного корня используйте функцию np.sqrt
-  r = np.sqrt(np.sum((A - B) ** 2))
-  return r
+    if (isinstance(A, np.ndarray) and isinstance(B, np.ndarray)):
+        return np.sqrt(np.sum((A - B) ** 2))
+    else:
+        raise Exception("Неверный тип массивов")
 
 
 # возвращает список индексов ближайших центров по каждой точке
@@ -27,63 +25,32 @@ def class_of_each_point(X, centers):
   return np.argmin(distances, axis=1)
 
 
-def kmeans(k, X):
+class kmeans:
+    
+    def __init__(self, k):
+        self.k = k
+        
+    def fit(self, X):
+        if len(X) < 1: return
+        m, n = X.shape
 
-  # TODO: инициализировать переменные m и n
-  # m - количество строк в матрице X
-  # n - количество столбцов в матрице X
-  # Используйте свойство shape матрицы X для решения этой задачи
-  # Чтобы понять, что хранится в свойстве shape, попробуйте в консоли Python следующий код:
-  # >>> ones = np.ones((3, 2))
-  # >>> ones
-  # >>> ones.shape
-  # m = ...  # количество строк в матрице X
-  # n = ...  # количество столбцов в матрице X
-  
-  if len(X) < 1: return 
-  
-  m = X.shape[0]
-  n = X.shape[1]
-
-  curr_iteration = prev_iteration = np.zeros(m)
-
-  # TODO: сгенерировать k кластерных центров со случайными координатами.
-  # Должна получиться матрица случайных чисел размера k*n (k строк, n столбцов).
-  # Для генерации матрицы случайных чисел используйте код:
-  #   centers = np.random.random((k, n))
-  # Функция random генерирует случайные числа в диапазоне от 0 до 1, поэтому
-  # не забывайте, что координаты центров не должны выходить
-  # за границы минимальных и максимальных значений столбцов (признаков) матрицы X.
-  # Для вычисления минимальных и максимальных значений по столбцам (признакам)
-  # матрицы X используйте функции min(X, axis=0) и max(X, axis=0) библиотеки NumPy соответственно.
-  # centers = ...
-  
-  _min = np.min(X, axis=0)
-  _max = np.max(X, axis=0)
-  centers = np.random.random((k, n))*(_max - _min) + _min
+        curr_iteration = prev_iteration = np.zeros(m)
+        _min = np.min(X, axis=0)
+        _max = np.max(X, axis=0)
+        centers = np.random.random((self.k, n))*(_max - _min) + _min
 
   # приписываем каждую точку к заданному классу
-  curr_iteration = class_of_each_point(X, centers)
-
-  # цикл до тех пор, пока центры не стабилизируются
-  # TODO: условие выхода из цикла - векторы curr_iteration и prev_iteration стали равны
-  # Для сравнения двух массивов NumPy можете использовать один из вариантов:
-  #   np.all(a1 == a2), где a1 и a2 массивы NumPy.
-  # или
-  #   np.any(a1 != a2)
-  # Для реализации логического отрицания в Python используйте not
-  # Поэкспериментируйте в консоли Python с функциями all и any, чтобы понять, как они работают.
-  while np.any(curr_iteration != prev_iteration):
-
-    prev_iteration = curr_iteration
+        curr_iteration = class_of_each_point(X, centers)
+        while np.any(curr_iteration != prev_iteration):
+            prev_iteration = curr_iteration
 
     # вычисляем новые центры масс
-    for i in range(k):
-      sub_X = X[curr_iteration == i,:]
-      if len(sub_X) > 0:
-        centers[i,:] = np.mean(sub_X, axis=0)
+            for i in range(self.k):
+                sub_X = X[curr_iteration == i,:]
+                if len(sub_X) > 0:
+                    centers[i,:] = np.mean(sub_X, axis=0)
 
     # приписываем каждую точку к заданному классу
-    curr_iteration = class_of_each_point(X, centers)
-  
-  return centers
+            curr_iteration = class_of_each_point(X, centers)
+        
+        return centers
