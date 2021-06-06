@@ -4,7 +4,8 @@ import re
 def regex(Data, regPattern):
     for _str in Data:
         result = re.search(regPattern, str(_str))
-        print(_str, 'Подходит\n' if result else 'Не подходит\n')
+        print(_str, 'Подходит' if result else 'Не подходит')
+    print("\n")
         
 
 #                 Задание 2
@@ -13,7 +14,7 @@ def regex(Data, regPattern):
 
 emails = ['a@b.c', 'a-b@c.d.e', 'a-b_c.d@e_f-g.h',
         'a+@b.c', 'a_b.c', 'a_b@.c-d.', 'danil@purtov.top']
-regPattern = r'([-0-9A-z\.]{1,})@([0-9A-Za-z]{1,}).([0-9A-Za-z]{1,})'
+regPattern = r'([-0-9A-z\.]+)@([0-9A-Za-z]+)\.([0-9A-Za-z]+)'
 regex(emails, regPattern)
 
 
